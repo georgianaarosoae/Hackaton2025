@@ -1,12 +1,12 @@
 package com.example.hackaton2025.navigation
 
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
@@ -14,9 +14,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.hackaton2025.R
 
@@ -31,28 +35,29 @@ fun  AppBottomNavigationBar(
     val navigationItems = listOf(
         NavigationItem(
             title = "Overview",
-            icon = Icons.Default.Home,
+            iconVector = Icons.Default.Home,
             destination = Destinations.OverviewDestination
         ),
         NavigationItem(
             title = "Wishlist",
-            icon = Icons.Default.Person,
+            iconVector = Icons.Default.Favorite,
             destination = Destinations.WishlistDestination
         ),
         NavigationItem(
             title = "Tasks",
-            icon = Icons.Default.ShoppingCart,
+            iconVector = Icons.Default.Done,
             destination = Destinations.TasksDestination
         ),
         NavigationItem(
             title = "Games",
-            icon = Icons.Default.Settings,
+//            iconVector = Icons.Default.PlayArrow,
+            iconPainter = painterResource(R.drawable.game_controller),
             destination = Destinations.GamesDestination
         )
     )
 
     NavigationBar(
-        containerColor = Color.White
+        containerColor = colorResource(R.color.blue100)
     ) {
         navigationItems.forEachIndexed { index, item -> 
             NavigationBarItem(
@@ -62,7 +67,20 @@ fun  AppBottomNavigationBar(
                     navController.navigate(item.destination)
                 },
                 icon = {
-                    Icon(imageVector = item.icon, contentDescription = item.title)
+                    val modifier = Modifier.size(32.dp)
+                    if (item.iconVector != null) {
+                        Icon(
+                            imageVector = item.iconVector,
+                            contentDescription = item.title,
+                            modifier
+                        )
+                    } else if (item.iconPainter != null) {
+                        Icon(
+                            painter = item.iconPainter,
+                            contentDescription = item.title,
+                            modifier
+                        )
+                    }
                 },
                 label = {
                     Text(item.title)
@@ -81,6 +99,7 @@ fun  AppBottomNavigationBar(
 
 data class NavigationItem(
     val title: String,
-    val icon: ImageVector,
+    val iconVector: ImageVector? = null,
+    val iconPainter: Painter? = null,
     val destination: Any
 )
