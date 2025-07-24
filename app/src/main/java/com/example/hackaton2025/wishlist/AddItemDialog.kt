@@ -51,7 +51,7 @@ fun AddItemDialog(onAdd: (WishlistItem) -> Unit, onCancel: () -> Unit) {
                 OutlinedTextField(
                     value = price,
                     onValueChange = { price = it },
-                    label = { Text("Preț (RON)") },
+                    label = { Text("DB Coins") },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                 )
                 Spacer(modifier = Modifier.height(8.dp))
