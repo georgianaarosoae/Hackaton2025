@@ -16,7 +16,6 @@ hilt = "2.51"
 hiltNavigation = "1.2.0"
 
 
-
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }

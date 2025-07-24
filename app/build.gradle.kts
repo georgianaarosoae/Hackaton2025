@@ -92,4 +92,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
+    //pentru drag & drop
+    implementation("org.burnoutcrew.composereorderable:reorderable:0.9.6")
+
 }
