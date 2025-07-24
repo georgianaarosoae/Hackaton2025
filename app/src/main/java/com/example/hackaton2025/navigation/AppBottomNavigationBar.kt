@@ -21,7 +21,7 @@ import androidx.navigation.NavController
 import com.example.hackaton2025.R
 
 @Composable
-fun AppBottomNavigationBar(
+fun  AppBottomNavigationBar(
     navController: NavController
 ) {
     val selectedNavigationIndex = rememberSaveable {
