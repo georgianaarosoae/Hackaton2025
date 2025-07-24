@@ -1,10 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="odysseyBlue100">#F5F9FE</color>
+    <color name="odysseyBlue200">#E7F4FE</color>
+    <color name="odysseyBlue300">#BFD5F7</color>
+    <color name="odysseyBlue350">#A8C4F8</color>
+    <color name="odysseyBlue400">#76A2E8</color>
+    <color name="odysseyBlue500">#5087E0</color>
+    <color name="odysseyBlue600">#2B6BD9</color>
+    <color name="odysseyBlue700">#1C51B5</color>
+    <color name="odysseyBlue800">#163796</color>
+    <color name="odysseyBlue900">#1E2A78</color>
+
+    <color name="darkBlue">#16184E</color>
+    <color name="darkBlue100">#1C266F</color>
+    <color name="darkBlue200">#1B264A</color>
+    <color name="darkBlue300">#1A2265</color>
+    <color name="darkBlue400">#1A2061</color>
+    <color name="darkBlue500">#191E5C</color>
+    <color name="darkBlue600">#171A53</color>
+    <color name="darkBlue700">#171A53</color>
+    <color name="darkBlue800">#16184E</color>
+
+    <color name="lightNeutrals50">#F7F7F7</color>
+    <color name="lightNeutrals100">#F0F0F0</color>
+    <color name="lightNeutrals200">#E1E1E1</color>
+    <color name="lightNeutrals300">#BCBCBC</color>
+    <color name="lightNeutrals400">#A5A5A5</color>
+    <color name="lightNeutrals500">#A0A0A0</color>
+    <color name="lightNeutrals600">#8A8A8A</color>
+    <color name="lightNeutrals700">#747474</color>
+    <color name="lightNeutrals800">#5F5F5F</color>
+
+    <color name="neutral100">#FFFFFF</color>
+    <color name="neutral200">#000000</color>
+
+    <color name="red100">#FCE6E6</color>
+    <color name="red300">#F39999</color>
+    <color name="red500">#F29055</color>
+    <color name="red700">#9E0404</color>
+    <color name="red900">#8A0033</color>
+
+    <color name="amber100">#F7EFE9</color>
+    <color name="amber300">#DFBE46</color>
+    <color name="amber500">#B26025</color>
+    <color name="amber700">#7D431A</color>
+    <color name="amber900">#6D3B17</color>
+
+    <color name="green100">#E6F3E9</color>
+    <color name="green300">#9CAD45</color>
+    <color name="green500">#088824</color>
+    <color name="green700">#065C19</color>
+    <color name="green900">#055116</color>
+
+    <color name="blue100">#EDF4FC</color>
+    <color name="blue300">#C9EFF7</color>
+    <color name="blue500">#4AC9E3</color>
+    <color name="blue700">#3BA1B6</color>
+    <color name="blue900">#2C7988</color>
+
+    <color name="additional100">#7783CD</color>
+    <color name="additional200">#24778D</color>
+    <color name="additional300">#25A6D2</color>
+    <color name="additional400">#949902</color>
+    <color name="additional500">#E15551</color>
+    <color name="additional600">#794168</color>
+    <color name="additional700">#74316C</color>
+    <color name="additional800">#D4005C</color>
+
+    <color name="waterBlue300">#70A7CC</color>
+    <color name="waterBlue400">#4098BD</color>
+    <color name="waterBlue500">#169CAC</color>
+    <color name="waterBlue600">#0D5688</color>
+    <color name="waterBlue700">#0A4166</color>
+    <color name="waterBlue800">#062B44</color>
+    <color name="waterBlue900">#031622</color>
+
+    <color name="yellow100">#FFFCD5</color>
+    <color name="yellow300">#FFF26A</color>
+    <color name="yellow500">#FFCE30</color>
+    <color name="yellow700">#FCB100</color>
+    <color name="yellow900">#916500</color>
+
+    <color name="magenta100">#F7E7EF</color>
+    <color name="magenta300">#E1599C</color>
+    <color name="magenta500">#981B62</color>
+    <color name="magenta700">#A61445</color>
+    <color name="magenta900">#3D0C27</color>
+
 </resources>
