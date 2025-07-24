@@ -173,7 +173,7 @@ fun MoneyStatusScreen(
                     )
                 }
 
-                started = false
+
                 for (i in 0 until points.size - 1) {
                     val start = points[i]
                     val end = points[i + 1]

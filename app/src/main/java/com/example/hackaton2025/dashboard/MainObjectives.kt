@@ -37,11 +37,9 @@ fun MainObjectives() {
         distribuiBugetulPePrioritati(wishlist, savedAmount)
     }
 
-
     val configuration = LocalConfiguration.current
     val screenWidthDp = configuration.screenWidthDp.dp
     val itemSize = screenWidthDp * 0.35f
-
 
     LazyRow(
         contentPadding = PaddingValues(vertical = 8.dp),
@@ -51,8 +49,7 @@ fun MainObjectives() {
 
             Box(
                 modifier = Modifier
-                    .width(itemSize)
-                    .height(300.dp),
+                    .width(itemSize),
                 contentAlignment = Alignment.Center
             ) {
                 WishlistItem(
@@ -60,10 +57,9 @@ fun MainObjectives() {
                     alocat = alocari[item.name] ?: 0f,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 10.dp)
+                        .height(240.dp)
                 )
             }
-
         }
     }
 }

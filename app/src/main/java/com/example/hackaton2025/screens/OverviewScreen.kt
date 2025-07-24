@@ -15,7 +15,7 @@ import com.example.hackaton2025.dashboard.DashboardScreen
 
 @Composable
 fun OverviewScreen(navController: NavController) {
-    Box(modifier = Modifier.background(Color(0xFFFFFFFF)).fillMaxSize().padding(16.dp)) {
+    Box(modifier = Modifier.background(Color(0xFFFFFFFF)).fillMaxSize().padding(horizontal = 16.dp)) {
         DashboardScreen()
     }
 }
