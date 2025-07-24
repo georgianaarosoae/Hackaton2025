@@ -40,7 +40,7 @@ fun MoneyStatusScreen(
 ) {
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp.dp
-    val cardHeight = screenHeight * 0.30f
+    val cardHeight = screenHeight * 0.40f
 
     val animationProgress = remember { Animatable(0f) }
 
@@ -108,100 +108,102 @@ fun MoneyStatusScreen(
             }
         }
 
-        Canvas(
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
-            val width = size.width
-            val height = size.height
+        Column(Modifier.padding(top = 10.dp)) {
+            Canvas(
+                modifier = Modifier
+                    .fillMaxSize()
+            ) {
+                val width = size.width
+                val height = size.height
 
-            val points = listOf(
-                Offset(0f, height * 0.7f),
-                Offset(width * 0.3f, height * 0.5f),
-                Offset(width * 0.6f, height * 0.8f),
-                Offset(width, height * 0.6f)
-            )
-
-            val lineColor = Color.White.copy(alpha = 0.8f)
-            val fillColor = Brush.verticalGradient(
-                colors = listOf(
-                    Color.White.copy(alpha = 0.3f),
-                    Color.Transparent
-                )
-            )
-
-            val progress = animationProgress.value
-
-            val path = Path()
-            var started = false
-            var lastPoint: Offset? = null
-
-            for (i in 0 until points.size - 1) {
-                val start = points[i]
-                val end = points[i + 1]
-                val segmentProgress = (progress * (points.size - 1)) - i
-
-                if (segmentProgress <= 0f) break
-
-                val clampedProgress = segmentProgress.coerceIn(0f, 1f)
-                val currentEnd = Offset(
-                    x = start.x + (end.x - start.x) * clampedProgress,
-                    y = start.y + (end.y - start.y) * clampedProgress
+                val points = listOf(
+                    Offset(0f, height * 0.7f),
+                    Offset(width * 0.3f, height * 0.5f),
+                    Offset(width * 0.6f, height * 0.8f),
+                    Offset(width, height * 0.6f)
                 )
 
-                if (!started) {
-                    path.moveTo(start.x, start.y)
-                    started = true
+                val lineColor = Color.White.copy(alpha = 0.8f)
+                val fillColor = Brush.verticalGradient(
+                    colors = listOf(
+                        Color.White.copy(alpha = 0.3f),
+                        Color.Transparent
+                    )
+                )
+
+                val progress = animationProgress.value
+
+                val path = Path()
+                var started = false
+                var lastPoint: Offset? = null
+
+                for (i in 0 until points.size - 1) {
+                    val start = points[i]
+                    val end = points[i + 1]
+                    val segmentProgress = (progress * (points.size - 1)) - i
+
+                    if (segmentProgress <= 0f) break
+
+                    val clampedProgress = segmentProgress.coerceIn(0f, 1f)
+                    val currentEnd = Offset(
+                        x = start.x + (end.x - start.x) * clampedProgress,
+                        y = start.y + (end.y - start.y) * clampedProgress
+                    )
+
+                    if (!started) {
+                        path.moveTo(start.x, start.y)
+                        started = true
+                    }
+                    path.lineTo(currentEnd.x, currentEnd.y)
+
+                    lastPoint = currentEnd
+
+                    if (segmentProgress < 1f) break
                 }
-                path.lineTo(currentEnd.x, currentEnd.y)
 
-                lastPoint = currentEnd
+                if (started && lastPoint != null) {
 
-                if (segmentProgress < 1f) break
-            }
+                    path.lineTo(lastPoint.x, height)
+                    path.lineTo(points.first().x, height)
+                    path.close()
 
-            if (started && lastPoint != null) {
+                    drawPath(
+                        path = path,
+                        brush = fillColor
+                    )
+                }
 
-                path.lineTo(lastPoint.x, height)
-                path.lineTo(points.first().x, height)
-                path.close()
+                started = false
+                for (i in 0 until points.size - 1) {
+                    val start = points[i]
+                    val end = points[i + 1]
+                    val segmentProgress = (progress * (points.size - 1)) - i
 
-                drawPath(
-                    path = path,
-                    brush = fillColor
-                )
-            }
+                    if (segmentProgress <= 0f) continue
 
-            started = false
-            for (i in 0 until points.size - 1) {
-                val start = points[i]
-                val end = points[i + 1]
-                val segmentProgress = (progress * (points.size - 1)) - i
+                    val clampedProgress = segmentProgress.coerceIn(0f, 1f)
+                    val currentEnd = Offset(
+                        x = start.x + (end.x - start.x) * clampedProgress,
+                        y = start.y + (end.y - start.y) * clampedProgress
+                    )
 
-                if (segmentProgress <= 0f) continue
+                    drawLine(
+                        color = lineColor,
+                        start = start,
+                        end = currentEnd,
+                        strokeWidth = 3f
+                    )
 
-                val clampedProgress = segmentProgress.coerceIn(0f, 1f)
-                val currentEnd = Offset(
-                    x = start.x + (end.x - start.x) * clampedProgress,
-                    y = start.y + (end.y - start.y) * clampedProgress
-                )
+                    if (segmentProgress < 1f) break
+                }
 
-                drawLine(
-                    color = lineColor,
-                    start = start,
-                    end = currentEnd,
-                    strokeWidth = 3f
-                )
-
-                if (segmentProgress < 1f) break
-            }
-
-            if (progress * (points.size - 1) >= 2) {
-                drawCircle(
-                    color = Color.White,
-                    radius = 8f,
-                    center = points[2]
-                )
+                if (progress * (points.size - 1) >= 2) {
+                    drawCircle(
+                        color = Color.White,
+                        radius = 8f,
+                        center = points[2]
+                    )
+                }
             }
         }
     }
