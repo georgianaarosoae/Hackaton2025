@@ -27,10 +27,20 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.hackaton2025.R
+import com.example.hackaton2025.viewmodel.OverviewViewModel
+import com.example.hackaton2025.wishlist.WishlistItem
+import com.example.hackaton2025.wishlist.distribuiBugetulPePrioritati
 
 @Composable
 fun DashboardScreen() {
+fun DashboardScreen(navController: NavController) {
+    val vm: OverviewViewModel = hiltViewModel()
+
+    var text by remember { mutableStateOf("") }
     val scrollState = rememberScrollState()
     Column {
         Row {
@@ -102,6 +112,6 @@ fun DashboardScreenPreview() {
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        DashboardScreen()
+        DashboardScreen(rememberNavController())
     }
 }

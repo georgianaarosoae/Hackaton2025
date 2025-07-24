@@ -13,7 +13,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.hackaton2025.navigation.AppBottomNavigationBar
 import com.example.hackaton2025.navigation.AppNavHost
 import com.example.hackaton2025.ui.theme.Hackaton2025Theme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

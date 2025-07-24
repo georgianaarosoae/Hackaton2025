@@ -1,7 +1,5 @@
 package com.example.hackaton2025.wishlist
 
-import androidx.annotation.ColorRes
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -10,12 +8,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.material3.Text
-import androidx.compose.material3.Button
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -28,13 +24,18 @@ fun WishlistScreen( modifier: Modifier) {
 
     //lista de wish list ( 3 obiecte )
     val sampleItems = listOf(
-        WishlistItem("Bicycle", 1000f, R.drawable.bike, 1),
-        WishlistItem("Shoes", 500f, R.drawable.shoe, 2),
-        WishlistItem("PLaystation", 200f, R.drawable.playstation, 3)
+        WishlistItem("Shoes", 500f, R.drawable.shoe, 1),
+        WishlistItem("Lego", 300f, R.drawable.lego, 2),
+        WishlistItem("Bicycle", 1000f, R.drawable.bike, 3),
+        WishlistItem("PLaystation", 2000f, R.drawable.playstation, 4),
+        WishlistItem("Wireless Headphones", 500f, R.drawable.headphones, 5),
+        WishlistItem("Karaoke Microphone", 90f, R.drawable.microphone, 6),
+        WishlistItem("Board Game", 100f, R.drawable.board_game, 7),
+        WishlistItem("Game Controller", 250f, R.drawable.controller, 8),
     )
 
     var wishlist by remember { mutableStateOf(sampleItems.toMutableList()) }
-    var savedAmount by remember { mutableStateOf(900f) }
+    var savedAmount by remember { mutableStateOf(2000f) }
     var showDialog by remember { mutableStateOf(false) }
 
     val reorderState = rememberReorderableLazyListState(
@@ -103,12 +104,11 @@ fun WishlistScreen( modifier: Modifier) {
         Box(
             modifier = Modifier.fillMaxSize()
         ) {
-            // acest .align este valid aici
             FloatingActionButton(
                 onClick = { showDialog = true },
                 shape = CircleShape,
                 modifier = Modifier
-                    .align(Alignment.BottomEnd) // OK în BoxScope
+                    .align(Alignment.BottomEnd)
                     .padding(16.dp)
             ) {
                 Icon(
@@ -119,8 +119,9 @@ fun WishlistScreen( modifier: Modifier) {
         }
         if (showDialog) {
             AddItemDialog(
-                onAdd = {newItem ->
-                    wishlist.add(newItem)
+                onAdd = { newItem ->
+                    val itemWithImage = newItem.copy(imageRes = R.drawable.present)
+                    wishlist.add(itemWithImage)
                     wishlist = wishlist.mapIndexed { index, item ->
                         item.copy(prioriry = index + 1)
                     }.toMutableList()
