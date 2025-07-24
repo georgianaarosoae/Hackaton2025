@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt.android)
     kotlin("kapt")
+    kotlin("plugin.serialization") version "2.1.10"
 }
 
 android {
@@ -47,6 +48,10 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+
+    // Navigation
+    implementation(libs.androidx.navigation.compose)
+//    implementation(libs.kotlin.serialization.json)
 
     // Compose UI
     implementation(platform(libs.androidx.compose.bom))
