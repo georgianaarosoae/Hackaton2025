@@ -1,5 +1,6 @@
 package com.example.hackaton2025.wishlist
 
+import androidx.annotation.ColorRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -16,11 +17,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlin.math.roundToInt
+import androidx.compose.ui.res.colorResource
+import com.example.hackaton2025.R
+
 
 @Composable
 fun WishlistItem(item: WishlistItem, alocat: Float, modifier: Modifier = Modifier) {
@@ -29,7 +34,7 @@ fun WishlistItem(item: WishlistItem, alocat: Float, modifier: Modifier = Modifie
 
     Card(
         modifier = modifier
-            .height(260.dp)
+            .height(200.dp)
             .clip(RoundedCornerShape(24.dp))
             .shadow(8.dp),
         shape = RoundedCornerShape(24.dp)
@@ -44,13 +49,12 @@ fun WishlistItem(item: WishlistItem, alocat: Float, modifier: Modifier = Modifie
                         modifier = Modifier
                             .width(progressWidth.dp)
                             .fillMaxHeight()
-                            .background(Color(0xFFFFA5B4)) // Roz progres
-                    )
+                            .backgroundResourceColor(R.color.odysseyBlue900)) //completat                    )
                     Box(
                         modifier = Modifier
                             .weight(1f)
                             .fillMaxHeight()
-                            .background(Color(0xFFFFE5E9)) // Roz deschis rest
+                            .backgroundResourceColor(R.color.odysseyBlue300) //necompletat
                     )
                 }
 
@@ -58,45 +62,47 @@ fun WishlistItem(item: WishlistItem, alocat: Float, modifier: Modifier = Modifie
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(horizontal = 16.dp, vertical = 12.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Image(
-                        painter = painterResource(id = item.imageRes),
-                        contentDescription = item.name,
-                        contentScale = ContentScale.Fit,
+                    Box(
                         modifier = Modifier
-                            .size(130.dp)
-                            .offset(y = (-16).dp)
-                            .shadow(6.dp, shape = RoundedCornerShape(16.dp))
-                    )
+                            .fillMaxWidth() ,contentAlignment = Alignment.Center) {
+                        Image(
+                            painter = painterResource(id = item.imageRes),
+                            contentDescription = item.name,
+                            contentScale = ContentScale.Fit,
+                            modifier = Modifier
+                                .width(150.dp)
+                                .height(100.dp)
+                                .shadow(16.dp)
 
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(
-                            text = item.name,
-                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                            color = Color.Black
-                        )
-                        Text(
-                            text = "RON ${alocat.toInt()} / ${item.price.toInt()}",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = Color.Black
+                            .clip(RoundedCornerShape(24.dp))
+                                .background(Color.White)
                         )
                     }
 
                     Row(
-                        Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.Bottom
                     ) {
-                        Text(
-                            text = "Prioritate: ${item.prioriry}",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = Color.Gray
-                        )
+                        Column {
+                            Text(
+                                text = item.name,
+                                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                                color = Color.White
+                            )
+                            Text(
+                                text = "RON ${alocat.toInt()} / ${item.price.toInt()}",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = Color.White
+                            )
+                        }
+
                         Text(
                             text = "$progressPercent%",
                             style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold),
-                            color = Color(0xFFAD1457)
+                            color = Color.White
                         )
                     }
                 }
@@ -104,6 +110,13 @@ fun WishlistItem(item: WishlistItem, alocat: Float, modifier: Modifier = Modifie
         }
     }
 }
+
+@Composable
+fun Modifier.backgroundResourceColor(@ColorRes colorResId: Int): Modifier {
+    val color = colorResource(id = colorResId)
+    return this.background(color)
+}
+
 
 
 
