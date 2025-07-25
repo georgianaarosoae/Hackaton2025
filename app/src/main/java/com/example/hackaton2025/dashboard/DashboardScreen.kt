@@ -1,22 +1,18 @@
 package com.example.hackaton2025.dashboard
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.content.MediaType.Companion.Text
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,10 +20,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -39,8 +35,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.hackaton2025.R
 import com.example.hackaton2025.viewmodel.OverviewViewModel
-import com.example.hackaton2025.wishlist.WishlistItem
-import com.example.hackaton2025.wishlist.distribuiBugetulPePrioritati
 
 @Composable
 fun DashboardScreen(navController: NavController) {
@@ -48,37 +42,64 @@ fun DashboardScreen(navController: NavController) {
 
     var text by remember { mutableStateOf("") }
     val scrollState = rememberScrollState()
+    Column {
+        Row {
+            Spacer(modifier = Modifier.weight(1f))
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(scrollState)
-    ){
-        MoneyStatusScreen()
-        Spacer(modifier = Modifier.height(16.dp))
+            Box(
+                modifier = Modifier
+                    .width(64.dp)
+                    .clip(CircleShape)
+                    .background(Color.White)
+                    .offset(10.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_kid),
+                    contentDescription = "",
+                )
+            }
+        }
 
-        MainTasks()
 
-        ChatAiScreen(
-            text = text,
-            onTextChange = { text = it },
-            onMicClick = { }
-        )
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(scrollState)
+        ) {
 
-        Text(
-            text = "Main Objectives",
-            color = Color(0xFF0D5688),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Start,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.fillMaxWidth()
-                .padding(top = 32.dp)
-        )
+            MoneyStatusScreen()
 
-        MainObjectives()
+            Text(
+                text = "Main Tasks",
+                color = Color(0xFF0D5688),
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Start,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 32.dp)
+            )
 
+            MainTasks()
+
+            Text(
+                text = "Main Objectives",
+                color = Color(0xFF0D5688),
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Start,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp)
+            )
+
+            MainObjectives()
+
+        }
     }
 
 }

@@ -64,15 +64,7 @@ fun MainTasks() {
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .padding(16.dp)
     ) {
-        Text(
-            text = "My Activities",
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 12.dp)
-        )
-
         items.forEach { item ->
             ActivityCard(item)
 
@@ -138,7 +130,7 @@ fun ActivityCard(item: ActivityItem) {
                     Box(
                         modifier = Modifier
                             .size(20.dp)
-                            .background(Color.LightGray, shape = CircleShape)
+                            .background(Color(0xFFEDF4FC), shape = CircleShape)
                     )
                 }
 
