@@ -159,9 +159,9 @@ fun AnimatedSmoothLine(
 
             // ✅ Make sure the last point is really at the end
             val points = listOf(
-                Offset(0f, height * 0.7f),
+                Offset(0f, height * 0.6f),
                 Offset(width * 0.3f, height * 0.5f),
-                Offset(width * 0.6f, height * 0.8f),
+                Offset(width * 0.6f, height * 0.7f),
                 Offset(width, height * 0.6f)   // last point at the end
             )
 
