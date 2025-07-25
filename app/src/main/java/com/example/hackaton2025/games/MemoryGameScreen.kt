@@ -84,11 +84,11 @@ fun MemoryGameScreen(
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            // ✅ Row cu imagine și buton Close
             Row() {
                 Spacer(Modifier.weight(1f))
                 IconButton(
                     onClick = { navController?.popBackStack() },
+                    modifier = Modifier.offset(16.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Default.Close,
@@ -101,14 +101,15 @@ fun MemoryGameScreen(
 
             Row(
                 modifier = Modifier
-                    .fillMaxWidth().offset(0.dp, -40.dp),
+                    .fillMaxWidth()
+                    .offset(0.dp, -40.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.pngtree_saving_money_clipart_boy_giving_piggy_bank_coins_to_save_money_vector_png_image_6866400),
                     contentDescription = "Logo",
-                    modifier = Modifier.size(100.dp)
+                    modifier = Modifier.size(80.dp)
                 )
 
                 Text(
@@ -126,7 +127,11 @@ fun MemoryGameScreen(
                 columns = GridCells.Fixed(4),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
+                    .offset(
+                        0.dp, -32.dp
+                    )
             ) {
                 itemsIndexed(cards) { index, card ->
                     CardFlip(
@@ -232,7 +237,7 @@ fun CardFlip(card: MemoryCard, onClick: () -> Unit) {
 
     Box(
         modifier = Modifier
-            .aspectRatio(0.4f)
+            .aspectRatio(0.8f)
             .clipToBounds()
             .graphicsLayer {
                 rotationY = rotation
