@@ -15,12 +15,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.hackaton2025.R
 import org.burnoutcrew.reorderable.*
 import kotlin.math.min
 
 @Composable
-fun WishlistScreen( modifier: Modifier) {
+fun WishlistScreen( navController: NavController) {
 
     //lista de wish list ( 3 obiecte )
     val sampleItems = listOf(
@@ -58,7 +59,7 @@ fun WishlistScreen( modifier: Modifier) {
     Box(modifier = Modifier.fillMaxSize()){
         Column(modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)) {
+            .padding(horizontal = 16.dp)) {
 
             // Total economisit
             Text(

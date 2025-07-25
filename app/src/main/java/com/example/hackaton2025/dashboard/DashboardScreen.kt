@@ -42,7 +42,7 @@ fun DashboardScreen(navController: NavController) {
 
     var text by remember { mutableStateOf("") }
     val scrollState = rememberScrollState()
-    Column {
+    Column(modifier = Modifier.padding(horizontal = 16.dp))  {
         Row {
             Spacer(modifier = Modifier.weight(1f))
 
