@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -109,7 +110,7 @@ fun MemoryGameScreen(
                 Image(
                     painter = painterResource(id = R.drawable.pngtree_saving_money_clipart_boy_giving_piggy_bank_coins_to_save_money_vector_png_image_6866400),
                     contentDescription = "Logo",
-                    modifier = Modifier.size(80.dp)
+                    modifier = Modifier.size(90.dp)
                 )
 
                 Text(
@@ -119,7 +120,7 @@ fun MemoryGameScreen(
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center
                 )
-
+                Spacer(Modifier.height(16.dp))
             }
 
 
@@ -130,7 +131,7 @@ fun MemoryGameScreen(
                 modifier = Modifier
                     .weight(1f)
                     .offset(
-                        0.dp, -32.dp
+                        0.dp, -28.dp
                     )
             ) {
                 itemsIndexed(cards) { index, card ->
@@ -217,7 +218,9 @@ fun MemoryGameScreen(
                         textAlign = TextAlign.Center
                     )
                     Button(
-                        onClick = { showCongratsDialog = false },
+                        onClick = {
+                            navController?.popBackStack()
+                            showCongratsDialog = false },
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Text("Close")
@@ -261,7 +264,7 @@ fun CardFlip(card: MemoryCard, onClick: () -> Unit) {
 }
 
 fun generateShuffledCards(): List<MemoryCard> {
-    val emojis = listOf("💰", "💳", "💵", "💷", "🪙", "🏦", "💷", "💴")
+    val emojis = listOf("💰", "💳", "💵", "💷", "🪙", "🏦", "💴", "💸")
     val pairs = (emojis + emojis).shuffled()
     return pairs.map { MemoryCard(it) }
 }
