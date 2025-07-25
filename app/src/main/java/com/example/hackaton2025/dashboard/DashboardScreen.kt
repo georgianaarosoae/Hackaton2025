@@ -50,7 +50,6 @@ fun DashboardScreen(navController: NavController) {
                 modifier = Modifier
                     .width(64.dp)
                     .clip(CircleShape)
-                    .background(Color.White)
                     .offset(10.dp)
             ) {
                 Image(
@@ -106,7 +105,6 @@ fun DashboardScreen(navController: NavController) {
             )
 
             MainObjectives()
-
         }
     }
 

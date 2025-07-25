@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Hackaton2025</string>
+    <string name="whishlist_title">So far you saved %1$s %2$s</string>
+    <string name="whishlist_add_a_wishilist_item">Add a wishlist item</string>
+    <string name="whishlist_amount">Amount (%s)</string>
+    <string name="whishlist_remaining">Remaining: %1$d %2$s</string>
 </resources>

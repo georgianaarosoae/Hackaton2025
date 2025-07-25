@@ -28,7 +28,7 @@ class EducationRepositoryImpl @Inject constructor(private val api: UserApi) : Ed
                     else
                         Log.e("repo", "fauled to get: ${response.errorBody()?.string()}")
 
-                    delay(10_000)
+                    delay(60_000)
                 }
             }
         }

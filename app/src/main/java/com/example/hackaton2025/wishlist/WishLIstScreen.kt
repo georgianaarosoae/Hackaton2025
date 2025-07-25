@@ -12,11 +12,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.hackaton2025.Constants
 import com.example.hackaton2025.R
+import com.example.hackaton2025.data.fakeData.WishlistData
 import org.burnoutcrew.reorderable.*
 import kotlin.math.min
 
@@ -25,18 +28,15 @@ fun WishlistScreen( navController: NavController) {
 
     //lista de wish list ( 3 obiecte )
     val sampleItems = listOf(       // TODO eliminina
-        WishlistItem("Shoes", 500f, R.drawable.shoe, 1),
-        WishlistItem("Lego", 300f, R.drawable.lego, 2),
-        WishlistItem("Bicycle", 1000f, R.drawable.bike, 3),
-        WishlistItem("Playstation", 2000f, R.drawable.playstation, 4),
-        WishlistItem("Wireless Headphones", 500f, R.drawable.headphones, 5),
-        WishlistItem("Karaoke Microphone", 90f, R.drawable.microphone, 6),
-        WishlistItem("Board Game", 100f, R.drawable.board_game, 7),
-        WishlistItem("Game Controller", 250f, R.drawable.controller, 8),
+        WishlistData("Lego", 40f, R.drawable.lego, 2),
+        WishlistData("Bicycle", 600f, R.drawable.bike, 3),
+        WishlistData("New Headphones", 70f, R.drawable.headphones, 5),
+        WishlistData("Board Game", 20f, R.drawable.board_game, 7),
+        WishlistData("Game Controller", 75f, R.drawable.controller, 8),
     )
 
     var wishlist by remember { mutableStateOf(sampleItems.toMutableList()) }
-    var savedAmount by remember { mutableStateOf(2000f) }
+    var savedAmount by remember { mutableStateOf(120f) }
     var showDialog by remember { mutableStateOf(false) }
 
     val reorderState = rememberReorderableLazyListState(
@@ -46,7 +46,7 @@ fun WishlistScreen( navController: NavController) {
 
                 //  Actualizăm prioritățile după mutare
                 forEachIndexed { index, item ->
-                    this[index] = item.copy(prioriry = index + 1)
+                    this[index] = item.copy(priority = index + 1)
                 }
             }
         }
@@ -60,20 +60,25 @@ fun WishlistScreen( navController: NavController) {
         Column(modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 16.dp)) {
-
-            // Total economisit
             Text(
-                text = "Saved ${savedAmount.toInt()} DB Coins",
+                text = "Wishlist",
                 style = MaterialTheme.typography.headlineMedium.copy(
                     fontWeight = FontWeight.Bold,
                     color = Color(0xFF062B44),
                 ),
                 textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 24.dp)
-                    .statusBarsPadding()
+                modifier = Modifier.fillMaxWidth()
             )
+            Text(
+                text = stringResource(R.string.whishlist_title, savedAmount.toInt().toString(), Constants.CURRENCY_SIGN),
+                style = MaterialTheme.typography.headlineSmall.copy(
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF062B44),
+                ),
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(16.dp))
 
             // Lista obiecte
             LazyColumn(
@@ -115,7 +120,7 @@ fun WishlistScreen( navController: NavController) {
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "Add wishlist item"
+                    contentDescription = stringResource(id = R.string.whishlist_add_a_wishilist_item),
                 )
             }
         }
@@ -125,7 +130,7 @@ fun WishlistScreen( navController: NavController) {
                     val itemWithImage = newItem.copy(imageRes = R.drawable.present)
                     wishlist.add(itemWithImage)
                     wishlist = wishlist.mapIndexed { index, item ->
-                        item.copy(prioriry = index + 1)
+                        item.copy(priority = index + 1)
                     }.toMutableList()
                     showDialog = false
                 },
@@ -135,18 +140,11 @@ fun WishlistScreen( navController: NavController) {
     }
 }
 
-data class WishlistItem(
-    val name: String,
-    val price: Float,
-    val imageRes: Int,
-    val prioriry:Int // setare prioritate
-)
-
 fun distribuiBugetulPePrioritati(
-    items: List<WishlistItem>,
+    items: List<WishlistData>,
     totalEconomisit: Float
 ): Map<String, Float> {
-    val sortedItems = items.sortedBy { it.prioriry }
+    val sortedItems = items.sortedBy { it.priority }
     val alocari = mutableMapOf<String, Float>()
 
     var bugetRamas = totalEconomisit

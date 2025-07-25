@@ -19,15 +19,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import com.example.hackaton2025.R
+import com.example.hackaton2025.data.fakeData.WishlistData
 import com.example.hackaton2025.wishlist.WishlistItem
 import com.example.hackaton2025.wishlist.distribuiBugetulPePrioritati
 
 @Composable
 fun MainObjectives() {
     val sampleItems = listOf(
-        WishlistItem("Playstation", 2000f, R.drawable.playstation, 1),
-        WishlistItem("Bicycle", 1000f, R.drawable.bike, 2),
-        WishlistItem("Shoes", 500f, R.drawable.shoe, 3),
+        WishlistData("Playstation", 2000f, R.drawable.playstation, 1),
+        WishlistData("Bicycle", 1000f, R.drawable.bike, 2),
+        WishlistData("Shoes", 500f, R.drawable.shoe, 3),
     )
 
     var savedAmount by remember { mutableStateOf(600f) }
