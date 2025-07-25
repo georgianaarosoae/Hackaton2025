@@ -50,7 +50,6 @@ fun  AppBottomNavigationBar(
         ),
         NavigationItem(
             title = "Games",
-//            iconVector = Icons.Default.PlayArrow,
             iconPainter = painterResource(R.drawable.game_controller),
             destination = Destinations.GamesDestination
         )

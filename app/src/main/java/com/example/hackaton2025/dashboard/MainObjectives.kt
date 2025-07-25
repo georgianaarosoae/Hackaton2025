@@ -25,9 +25,9 @@ import com.example.hackaton2025.wishlist.distribuiBugetulPePrioritati
 @Composable
 fun MainObjectives() {
     val sampleItems = listOf(
-        WishlistItem("PlayStation 5", 100f, R.drawable.bike, 1),
-        WishlistItem("Căști Bose", 200f, R.drawable.ic_launcher_background, 2),
-        WishlistItem("Bicicletă", 2200f, R.drawable.ic_launcher_background, 3)
+        WishlistItem("Playstation", 2000f, R.drawable.playstation, 1),
+        WishlistItem("Bicycle", 1000f, R.drawable.bike, 2),
+        WishlistItem("Shoes", 500f, R.drawable.shoe, 3),
     )
 
     var savedAmount by remember { mutableStateOf(600f) }

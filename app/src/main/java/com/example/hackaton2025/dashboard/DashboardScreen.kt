@@ -69,6 +69,14 @@ fun DashboardScreen(navController: NavController) {
 
             MoneyStatusScreen()
 
+            Spacer(modifier = Modifier.padding(top = 32.dp))
+
+            ChatAiScreen(
+                text = text,
+                onTextChange = { text = it },
+                onMicClick = {  }
+            )
+
             Text(
                 text = "Main Tasks",
                 color = Color(0xFF0D5688),

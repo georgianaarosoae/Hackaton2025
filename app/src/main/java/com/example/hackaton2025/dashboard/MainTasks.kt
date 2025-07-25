@@ -1,7 +1,6 @@
 package com.example.hackaton2025.dashboard
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,8 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -28,36 +25,42 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.hackaton2025.tasks.TaskCard
+import com.example.hackaton2025.tasks.TaskItem
 
 
 @Composable
 fun MainTasks() {
 
+    val now = java.time.LocalDateTime.now()
+    val tomorrowSameTime = now.plusDays(1)
+    val twoDaysLater = now.plusDays(2)
+
     val items = listOf(
-        ActivityItem(
-            title = "Hot Yoga",
-            description = "Designed to improve flexibility, build strength, detoxify the body through sw...",
-            date = "Jul 24, 2025 at 12:00",
+        TaskItem(
+            title = "Clean room",
+            description = "",
+            date = tomorrowSameTime.toString(),
             price = "$10.00",
             backgroundColor = Color(0xFFE4F3FD),
             isDone = false
         ),
-        ActivityItem(
-            title = "Healthy Breakfast",
-            description = "Quinoa Bowl with Avocado and Poached Egg",
-            date = "Jul 24, 2025 at 09:10",
-            price = "$23.00",
+        TaskItem(
+            title = "Do Homework",
+            description = "",
+            date = twoDaysLater.toString(),
+            price = "$15.00",
             backgroundColor = Color(0xFFE3F7E7),
             isDone = true
         ),
-        ActivityItem(
-            title = "Meeting with Alice",
-            description = "A brief catch-up to discuss current tasks, share updates, align on priorities, ...",
-            date = "Jul 24, 2025 at 10:40",
-            price = "$50.00",
-            backgroundColor = Color(0xFFE3F7E7),
-            isDone = true
-        )
+        TaskItem(
+            title = "Clean room",
+            description = "",
+            date = tomorrowSameTime.toString(),
+            price = "$10.00",
+            backgroundColor = Color(0xFFE4F3FD),
+            isDone = false
+        ),
     )
 
     Column(
@@ -66,92 +69,11 @@ fun MainTasks() {
             .background(Color.White)
     ) {
         items.forEach { item ->
-            ActivityCard(item)
-
+            TaskCard(item)
             Spacer(modifier = Modifier.height(12.dp))
         }
     }
 }
 
 
-@Composable
-fun ActivityCard(item: ActivityItem) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(item.backgroundColor, shape = RoundedCornerShape(12.dp))
-            .padding(12.dp)
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column(
-                modifier = Modifier.weight(1f)
-            ) {
-                Text(
-                    text = item.title,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp,
-                    color = Color.Black
-                )
 
-                Spacer(modifier = Modifier.height(4.dp))
-
-                Text(
-                    text = item.description,
-                    color = Color.Black.copy(alpha = 0.7f),
-                    fontSize = 13.sp,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
-                )
-
-                Spacer(modifier = Modifier.height(4.dp))
-
-                Text(
-                    text = item.date,
-                    color = Color.Gray,
-                    fontSize = 12.sp
-                )
-            }
-
-            Spacer(modifier = Modifier.width(8.dp))
-
-            Column(
-                horizontalAlignment = Alignment.End
-            ) {
-                if (item.isDone) {
-                    Icon(
-                        imageVector = Icons.Default.CheckCircle,
-                        contentDescription = "Done",
-                        tint = Color(0xFF3AC27D),
-                        modifier = Modifier.size(20.dp)
-                    )
-                } else {
-                    Box(
-                        modifier = Modifier
-                            .size(20.dp)
-                            .background(Color(0xFFEDF4FC), shape = CircleShape)
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(24.dp))
-
-                Text(
-                    text = item.price,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp,
-                    color = Color.Black
-                )
-            }
-        }
-    }
-}
-
-data class ActivityItem(
-    val title: String,
-    val description: String,
-    val date: String,
-    val price: String,
-    val backgroundColor: Color,
-    val isDone: Boolean
-)
