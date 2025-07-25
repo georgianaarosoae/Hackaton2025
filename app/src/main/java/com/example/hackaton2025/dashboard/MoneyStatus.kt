@@ -50,10 +50,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun MoneyStatusScreen(
-    profitAmount: String = "$ 15.2",
+    profitAmount: String = "€ 90",
     percentageChange: String = "+15%",
     description: String = "From the previous week"
 ) {
@@ -83,7 +84,9 @@ fun MoneyStatusScreen(
             )
     ) {
         Column(
-            modifier = Modifier.fillMaxSize().padding(16.dp)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
         ) {
             Text(
                 text = "Money status",
@@ -125,9 +128,15 @@ fun MoneyStatusScreen(
                     fontSize = 12.sp
                 )
             }
-        }
 
-        AnimatedSmoothLine()
+            Spacer(Modifier.height(16.dp))
+
+            AnimatedSmoothLine(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f) 
+            )
+        }
     }
 }
 
@@ -136,6 +145,15 @@ fun AnimatedSmoothLine(
     modifier: Modifier = Modifier,
     animationDuration: Int = 2000
 ) {
+    val balanceHistory = listOf(
+        Pair("2025-02-15T00:00:00Z", 100),
+        Pair("2025-03-23T00:00:00Z", 50),
+        Pair("2025-04-20T00:00:00Z", 150),
+        Pair("2025-05-30T00:00:00Z", 243),
+        Pair("2025-06-11T00:00:00Z", 300),
+        Pair("2025-07-25T00:00:00Z", 250)
+    )
+
     var startAnimation by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
@@ -148,76 +166,89 @@ fun AnimatedSmoothLine(
         label = "GraphAnimation"
     )
 
-    Column(modifier = modifier.padding(top = 10.dp)) {
-        Canvas(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(250.dp)
-        ) {
-            val width = size.width
-            val height = size.height
+    Canvas(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(160.dp)
+    ) {
+        val width = size.width
+        val height = size.height
 
-            // ✅ Make sure the last point is really at the end
-            val points = listOf(
-                Offset(0f, height * 0.6f),
-                Offset(width * 0.3f, height * 0.5f),
-                Offset(width * 0.6f, height * 0.7f),
-                Offset(width, height * 0.6f)   // last point at the end
-            )
+        val verticalPadding = 0.dp.toPx()
 
-            val path = Path().apply {
+        val formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
+        val timestamps = balanceHistory.map {
+            java.time.ZonedDateTime.parse(it.first, formatter).toEpochSecond()
+        }
+        val minTimestamp = timestamps.minOrNull()!!
+        val maxTimestamp = timestamps.maxOrNull()!!
+
+        val minValue = balanceHistory.minOf { it.second }
+        val maxValue = balanceHistory.maxOf { it.second }
+
+        val points = balanceHistory.mapIndexed { index, (_, value) ->
+            val timestamp = timestamps[index]
+            val xRatio = (timestamp - minTimestamp).toFloat() / (maxTimestamp - minTimestamp).toFloat()
+            val x = xRatio * width
+
+            val valueRatio = (value - minValue).toFloat() / (maxValue - minValue).toFloat()
+            val y = verticalPadding + (1 - valueRatio) * (height - 2 * verticalPadding)
+
+            Offset(x, y)
+        }
+
+
+        val path = Path().apply {
+            if (points.isNotEmpty()) {
                 moveTo(points[0].x, points[0].y)
                 for (i in 0 until points.size - 1) {
                     val midPoint = Offset(
-                        (points[i].x + points[i + 1].x) / 2,
-                        (points[i].y + points[i + 1].y) / 2
+                        (points[i].x + points[i + 1].x) / 2f,
+                        (points[i].y + points[i + 1].y) / 2f
                     )
                     quadraticBezierTo(points[i].x, points[i].y, midPoint.x, midPoint.y)
                 }
-                // ✅ finally, curve to the last point to make sure the line goes to the end
                 val secondLast = points[points.size - 2]
                 val last = points.last()
                 quadraticBezierTo(secondLast.x, secondLast.y, last.x, last.y)
             }
+        }
 
-            // Fill area under the curve
-            val fillPath = Path().apply {
-                addPath(path)
+        val fillPath = Path().apply {
+            addPath(path)
+            if (points.isNotEmpty()) {
                 lineTo(points.last().x, height)
                 lineTo(points.first().x, height)
                 close()
             }
-
-            val fillBrush = Brush.verticalGradient(
-                colors = listOf(Color.White.copy(alpha = 0.3f), Color.Transparent)
-            )
-
-            // Dash effect: estimate length better (length is close to width*1.2 because of curve)
-            val pathLengthEstimate = width * 1.2f
-            val effect = PathEffect.dashPathEffect(
-                floatArrayOf(pathLengthEstimate, pathLengthEstimate),
-                phase = pathLengthEstimate * (1 - progress)
-            )
-
-            // Draw animated fill
-            drawPath(
-                path = fillPath,
-                brush = fillBrush,
-                alpha = progress
-            )
-
-            // Draw animated white line with rounded corners
-            drawPath(
-                path = path,
-                color = Color.White,
-                style = Stroke(
-                    width = 4.dp.toPx(),
-                    cap = StrokeCap.Round,
-                    join = StrokeJoin.Round,
-                    pathEffect = effect
-                )
-            )
         }
+
+        val fillBrush = Brush.verticalGradient(
+            colors = listOf(Color.White.copy(alpha = 0.3f), Color.Transparent)
+        )
+
+
+        val pathLengthEstimate = width * 1.2f
+        val effect = PathEffect.dashPathEffect(
+            floatArrayOf(pathLengthEstimate, pathLengthEstimate),
+            phase = pathLengthEstimate * (1 - progress)
+        )
+
+        drawPath(
+            path = fillPath,
+            brush = fillBrush,
+            alpha = progress
+        )
+        drawPath(
+            path = path,
+            color = Color.White,
+            style = Stroke(
+                width = 4.dp.toPx(),
+                cap = StrokeCap.Round,
+                join = StrokeJoin.Round,
+                pathEffect = effect
+            )
+        )
     }
 }
 

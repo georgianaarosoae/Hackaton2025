@@ -34,8 +34,6 @@ fun WishlistScreen( navController: NavController) {
         onMove = { from, to ->
             wishlist = wishlist.toMutableList().apply {
                 add(to.index, removeAt(from.index))
-
-                //  Actualizăm prioritățile după mutare
                 forEachIndexed { index, item ->
                     this[index] = item.copy(priority = index + 1)
                 }
@@ -71,7 +69,6 @@ fun WishlistScreen( navController: NavController) {
             )
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Lista obiecte
             LazyColumn(
                 state = reorderState.listState,
                 modifier = Modifier

@@ -90,8 +90,6 @@ fun AddItemDialog(onAdd: (WishlistData) -> Unit, onCancel: () -> Unit) {
                 ExposedDropdownMenuBox(
                     expanded = expandedDropdown && isNameFieldFocused && filteredSuggestions.isNotEmpty(),
                     onExpandedChange = {
-                        // We control expansion based on focus and suggestions
-                        // expandedDropdown = !expandedDropdown // Default behavior, but we want more control
                     },
                     modifier = Modifier.fillMaxWidth()
                 ) {
@@ -102,7 +100,6 @@ fun AddItemDialog(onAdd: (WishlistData) -> Unit, onCancel: () -> Unit) {
                             filteredSuggestions = suggestions.filter { suggestion ->
                                 suggestion.contains(it, ignoreCase = true)
                             }
-                            // Show dropdown if there are suggestions and field has focus
                             expandedDropdown = filteredSuggestions.isNotEmpty() && isNameFieldFocused
                         },
                         label = { Text("Wishlist item name") },
@@ -118,8 +115,6 @@ fun AddItemDialog(onAdd: (WishlistData) -> Unit, onCancel: () -> Unit) {
                                 if (focusState.isFocused) {
                                     expandedDropdown = filteredSuggestions.isNotEmpty()
                                 } else {
-                                    // Consider a small delay before collapsing if needed
-                                    // to allow clicking on dropdown items
                                     expandedDropdown = false
                                 }
                             },
@@ -159,8 +154,7 @@ fun AddItemDialog(onAdd: (WishlistData) -> Unit, onCancel: () -> Unit) {
                                 onClick = {
                                     name = suggestion
                                     expandedDropdown = false
-                                    isNameFieldFocused = false // Optionally remove focus
-                                    // You might want to move focus to the price field here
+                                    isNameFieldFocused = false
                                 }
                             )
                         }
