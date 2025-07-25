@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import com.example.hackaton2025.screens.GamesScreen
 import com.example.hackaton2025.screens.OverviewScreen
 import com.example.hackaton2025.screens.TasksScreen
-import com.example.hackaton2025.screens.WishlistScreen
+import com.example.hackaton2025.wishlist.WishlistScreen
 
 @Composable
 fun AppNavHost(navController: NavHostController, modifier : Modifier) {
