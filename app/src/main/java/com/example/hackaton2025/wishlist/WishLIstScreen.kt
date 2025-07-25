@@ -26,7 +26,6 @@ import kotlin.math.min
 @Composable
 fun WishlistScreen( navController: NavController) {
 
-    //lista de wish list ( 3 obiecte )
     val sampleItems = listOf(       // TODO eliminina
         WishlistData("Lego", 40f, R.drawable.lego, 2),
         WishlistData("Bicycle", 600f, R.drawable.bike, 3),
@@ -43,8 +42,6 @@ fun WishlistScreen( navController: NavController) {
         onMove = { from, to ->
             wishlist = wishlist.toMutableList().apply {
                 add(to.index, removeAt(from.index))
-
-                //  Actualizăm prioritățile după mutare
                 forEachIndexed { index, item ->
                     this[index] = item.copy(priority = index + 1)
                 }
@@ -80,7 +77,6 @@ fun WishlistScreen( navController: NavController) {
             )
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Lista obiecte
             LazyColumn(
                 state = reorderState.listState,
                 modifier = Modifier
