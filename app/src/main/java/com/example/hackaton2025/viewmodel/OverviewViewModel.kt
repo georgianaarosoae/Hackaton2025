@@ -18,5 +18,11 @@ class OverviewViewModel @Inject constructor(
                 Log.e("overview", it.toString())
             }
         }
+
+        viewModelScope.launch {
+            repository.getChildTasks(7).collect {
+                Log.e("overview task", it.toString())
+            }
+        }
     }
 }

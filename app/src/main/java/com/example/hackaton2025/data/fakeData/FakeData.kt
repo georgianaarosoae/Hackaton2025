@@ -71,7 +71,7 @@ data object FakeData {
 
     internal val wishilistSuggestionItems = listOf(
         "Summer camp",
-        "Bike",
+        "Skateboard",
         "Football shoes"
     )
 

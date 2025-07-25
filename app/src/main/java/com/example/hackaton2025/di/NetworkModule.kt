@@ -15,7 +15,7 @@ import javax.inject.Named
 private const val BASE_URL_TYPICODE = "https://jsonplaceholder.typicode.com"
 private const val NAMED_TYPICODE = "typicode"
 
-private const val BASE_URL_HACKA = "https://db-hack-be-144591507519.europe-west1.run.app/api"
+private const val BASE_URL_HACKA = "https://db-hack-be-144591507519.europe-west1.run.app"
 private const val NAMED_HACKA = "hacka"
 
 @Module
