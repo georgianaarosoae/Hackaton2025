@@ -24,7 +24,7 @@ import kotlin.math.min
 fun WishlistScreen( navController: NavController) {
 
     //lista de wish list ( 3 obiecte )
-    val sampleItems = listOf(
+    val sampleItems = listOf(       // TODO eliminina
         WishlistItem("Shoes", 500f, R.drawable.shoe, 1),
         WishlistItem("Lego", 300f, R.drawable.lego, 2),
         WishlistItem("Bicycle", 1000f, R.drawable.bike, 3),
@@ -102,6 +102,7 @@ fun WishlistScreen( navController: NavController) {
                 }
             }
         }
+
         Box(
             modifier = Modifier.fillMaxSize()
         ) {
@@ -114,7 +115,7 @@ fun WishlistScreen( navController: NavController) {
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "Adaugă obiect"
+                    contentDescription = "Add wishlist item"
                 )
             }
         }
