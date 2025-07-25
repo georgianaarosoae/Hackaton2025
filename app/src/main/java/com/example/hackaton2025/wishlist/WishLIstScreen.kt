@@ -28,7 +28,7 @@ fun WishlistScreen( navController: NavController) {
         WishlistItem("Shoes", 500f, R.drawable.shoe, 1),
         WishlistItem("Lego", 300f, R.drawable.lego, 2),
         WishlistItem("Bicycle", 1000f, R.drawable.bike, 3),
-        WishlistItem("PLaystation", 2000f, R.drawable.playstation, 4),
+        WishlistItem("Playstation", 2000f, R.drawable.playstation, 4),
         WishlistItem("Wireless Headphones", 500f, R.drawable.headphones, 5),
         WishlistItem("Karaoke Microphone", 90f, R.drawable.microphone, 6),
         WishlistItem("Board Game", 100f, R.drawable.board_game, 7),

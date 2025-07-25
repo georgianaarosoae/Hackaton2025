@@ -1,10 +1,14 @@
 package com.example.hackaton2025.navigation
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.hackaton2025.HangmanGameScreen
+import com.example.hackaton2025.MemoryGameScreen
+import com.example.hackaton2025.MemoryGameScreenPreview
 import com.example.hackaton2025.screens.GamesScreen
 import com.example.hackaton2025.screens.OverviewScreen
 import com.example.hackaton2025.screens.TasksScreen
@@ -28,6 +32,12 @@ fun AppNavHost(navController: NavHostController, modifier : Modifier) {
         }
         composable<Destinations.GamesDestination> {
             GamesScreen(navController)
+        }
+        composable<Destinations.HangManDestionation> {
+            HangmanGameScreen(navController = navController)
+        }
+        composable<Destinations.MemoryGameDestination> {
+            MemoryGameScreen(navController = navController)
         }
     }
 }

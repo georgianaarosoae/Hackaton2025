@@ -15,4 +15,11 @@ sealed class Destinations {
 
     @Serializable
     object GamesDestination : Destinations()
+
+    @Serializable
+    object HangManDestionation : Destinations()
+
+    @Serializable
+    object MemoryGameDestination : Destinations()
+
 }
