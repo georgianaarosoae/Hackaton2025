@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -18,18 +17,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
-import com.example.hackaton2025.R
-import com.example.hackaton2025.data.fakeData.WishlistData
+import com.example.hackaton2025.data.fakeData.FakeData
 import com.example.hackaton2025.wishlist.WishlistItem
 import com.example.hackaton2025.wishlist.distribuiBugetulPePrioritati
 
 @Composable
 fun MainObjectives() {
-    val sampleItems = listOf(
-        WishlistData("Playstation", 2000f, R.drawable.playstation, 1),
-        WishlistData("Bicycle", 1000f, R.drawable.bike, 2),
-        WishlistData("Shoes", 500f, R.drawable.shoe, 3),
-    )
+    val sampleItems = FakeData.wishlistData.sortedBy { it.price }.take(3)
 
     var savedAmount by remember { mutableStateOf(600f) }
     var wishlist by remember { mutableStateOf(sampleItems.toMutableList()) }
@@ -54,11 +48,12 @@ fun MainObjectives() {
                 contentAlignment = Alignment.Center
             ) {
                 WishlistItem(
-                    item = item,
+                    wishlistItem = item,
                     alocat = alocari[item.name] ?: 0f,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(240.dp)
+                        .height(200.dp),
+                    showLoanButton = false
                 )
             }
         }

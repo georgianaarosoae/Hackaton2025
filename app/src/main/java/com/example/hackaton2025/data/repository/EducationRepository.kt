@@ -17,20 +17,28 @@ interface EducationRepository {
 class EducationRepositoryImpl @Inject constructor(private val api: UserApi) : EducationRepository {
     override fun getUsers(): Flow<List<UserDto>> {
         return flow {
-            coroutineScope {
-                while (isActive) {
-                    val response = api.getPostsForUser()
+            val response = api.getPostsForUser()
 
-                    if (response.isSuccessful)
-                        response.body()?.let {
-                            emit(it)
-                        }
-                    else
-                        Log.e("repo", "fauled to get: ${response.errorBody()?.string()}")
-
-                    delay(60_000)
+            if (response.isSuccessful)
+                response.body()?.let {
+                    emit(it)
                 }
-            }
+            else
+                Log.e("repo", "fauled to get: ${response.errorBody()?.string()}")
+//            coroutineScope {
+//                while (isActive) {
+//                    val response = api.getPostsForUser()
+//
+//                    if (response.isSuccessful)
+//                        response.body()?.let {
+//                            emit(it)
+//                        }
+//                    else
+//                        Log.e("repo", "fauled to get: ${response.errorBody()?.string()}")
+//
+//                    delay(60_000)
+//                }
+//            }
         }
     }
 }

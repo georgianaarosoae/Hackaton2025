@@ -19,23 +19,14 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.hackaton2025.Constants
 import com.example.hackaton2025.R
+import com.example.hackaton2025.data.fakeData.FakeData.wishlistData
 import com.example.hackaton2025.data.fakeData.WishlistData
 import org.burnoutcrew.reorderable.*
 import kotlin.math.min
 
 @Composable
 fun WishlistScreen( navController: NavController) {
-
-    //lista de wish list ( 3 obiecte )
-    val sampleItems = listOf(       // TODO eliminina
-        WishlistData("Lego", 40f, R.drawable.lego, 2),
-        WishlistData("Bicycle", 600f, R.drawable.bike, 3),
-        WishlistData("New Headphones", 70f, R.drawable.headphones, 5),
-        WishlistData("Board Game", 20f, R.drawable.board_game, 7),
-        WishlistData("Game Controller", 75f, R.drawable.controller, 8),
-    )
-
-    var wishlist by remember { mutableStateOf(sampleItems.toMutableList()) }
+    var wishlist by remember { mutableStateOf(wishlistData.toMutableList()) }
     var savedAmount by remember { mutableStateOf(120f) }
     var showDialog by remember { mutableStateOf(false) }
 
@@ -96,7 +87,7 @@ fun WishlistScreen( navController: NavController) {
                                 .padding(bottom = 12.dp)
                         ) {
                             WishlistItem(
-                                item = item,
+                                wishlistItem = item,
                                 alocat = alocari[item.name] ?: 0f,
                                 modifier = Modifier
                                     .fillMaxWidth()

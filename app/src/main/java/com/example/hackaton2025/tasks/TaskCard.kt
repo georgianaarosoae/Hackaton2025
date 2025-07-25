@@ -60,7 +60,7 @@ fun TaskCard(item: TaskItem) {
                     Box(
                         modifier = Modifier
                             .size(20.dp)
-                            .background(Color(0xFFEDF4FC), shape = CircleShape)
+                            .background(Color.LightGray, shape = CircleShape)
                     )
                 }
             }

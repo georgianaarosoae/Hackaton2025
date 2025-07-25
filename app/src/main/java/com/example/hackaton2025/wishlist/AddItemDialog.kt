@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import com.example.hackaton2025.Constants
 import com.example.hackaton2025.R
+import com.example.hackaton2025.data.fakeData.FakeData.wishilistSuggestionItems
 import com.example.hackaton2025.data.fakeData.WishlistData
 import kotlinx.coroutines.delay
 
@@ -48,7 +49,7 @@ fun AddItemDialog(onAdd: (WishlistData) -> Unit, onCancel: () -> Unit) {
     var price by remember { mutableStateOf("") }
 
     var isNameFieldFocused by remember { mutableStateOf(false) }
-    val suggestions = wishilistFakeItems
+    val suggestions = wishilistSuggestionItems
     var filteredSuggestions by remember { mutableStateOf(suggestions) }
     var expandedDropdown by remember { mutableStateOf(false) }
     var textFieldSize by remember { mutableStateOf(Size.Zero) }

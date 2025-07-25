@@ -1,5 +1,6 @@
 package com.example.hackaton2025.data.fakeData
 
+import com.example.hackaton2025.R
 import com.example.hackaton2025.tasks.TaskItem
 import java.time.LocalDateTime
 
@@ -7,6 +8,13 @@ data object FakeData {
     private val now = LocalDateTime.now()
 
     val allTasks = listOf(
+        TaskItem(
+            title = "Help your brother with his math homework.",
+            description = "Make sure he understands the homework",
+            deadline = now.withHour(21),
+            price = 5,
+            isDone = true
+        ),
         TaskItem(
             title = "Dry clothes from the washer",
             description = "You need to clean the filters first.",
@@ -53,5 +61,25 @@ data object FakeData {
             price = 5,
             isDone = false
         ),
+        TaskItem(
+            title = "Clean the litter box",
+            deadline = now.plusDays(6),
+            price = 5,
+            isDone = false
+        ),
+    )
+
+    internal val wishilistSuggestionItems = listOf(
+        "Summer camp",
+        "Bike",
+        "Football shoes"
+    )
+
+    val wishlistData = listOf(       // TODO eliminina
+        WishlistData("Lego", 40f, R.drawable.lego, 2),
+        WishlistData("Bicycle", 600f, R.drawable.bike, 3),
+        WishlistData("New Headphones", 70f, R.drawable.headphones, 5),
+        WishlistData("Board Game", 20f, R.drawable.board_game, 7),
+        WishlistData("Game Controller", 75f, R.drawable.controller, 8),
     )
 }
