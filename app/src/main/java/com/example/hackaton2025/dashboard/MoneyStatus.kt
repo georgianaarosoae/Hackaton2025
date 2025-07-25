@@ -53,7 +53,7 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun MoneyStatusScreen(
-    profitAmount: String = "$ 15.2",
+    profitAmount: String = "€ 90",
     percentageChange: String = "+15%",
     description: String = "From the previous week"
 ) {
